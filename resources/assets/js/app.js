@@ -1,20 +1,31 @@
+// Default colors
+var brandPrimary =  '#20a8d8';
+var brandSuccess =  '#4dbd74';
+var brandInfo =     '#63c2de';
+var brandWarning =  '#f8cb00';
+var brandDanger =   '#f86c6b';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
+var grayDark =      '#2a2c36';
+var gray =          '#55595c';
+var grayLight =     '#818a91';
+var grayLighter =   '#d1d4d7';
+var grayLightest =  '#f8f9fa';
 
-require('./bootstrap');
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-Vue.component('example', require('./components/Example.vue'));
-
-const app = new Vue({
-    el: '#app'
-});
+angular
+.module('app', [
+  'ui.router',
+  'oc.lazyLoad',
+  'ncy-angular-breadcrumb',
+  'angular-loading-bar'
+])
+.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+  cfpLoadingBarProvider.includeSpinner = false;
+  cfpLoadingBarProvider.latencyThreshold = 1;
+}])
+.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams) {
+  $rootScope.$on('$stateChangeSuccess',function(){
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
+  $rootScope.$state = $state;
+  return $rootScope.$stateParams = $stateParams;
+}]);

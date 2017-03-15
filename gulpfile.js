@@ -22,7 +22,7 @@ var paths = gulp.paths;
 gulp.task('serve', ['sass'], function() {
 
     browserSync.init({
-        server: "./"
+        server: "./resources"
     });
 
     gulp.watch('scss/**/*.scss', ['sass']);
@@ -35,7 +35,7 @@ gulp.task('serve', ['sass'], function() {
 gulp.task('serve:lite', function() {
 
     browserSync.init({
-        server: "./"
+        server: "./resources"
     });
 
     gulp.watch('**/*.css').on('change', browserSync.reload);
